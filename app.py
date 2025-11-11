@@ -4,6 +4,7 @@ import pandas as pd
 import datetime as datetime
 import pandas_datareader
 import plotly.graph_objects as go
+import matplotlib.pyplot as plt
 
 import sklearn.linear_model
 import sklearn.model_selection
@@ -114,6 +115,13 @@ try:
 
         df_stock3 = df_stock[['Close', 'Predict']]
         st.line_chart(df_stock3)
+        
+        # Pandasのデフォルト設定に依存した修正
+        df_stock['Close'].plot(figsize=(15, 6), color="green")
+        df_stock['Predict'].plot(figsize=(15, 6), color="orange")
+        
+        # MatplotlibのグラフをStreamlitに表示するために必要
+        st.pyplot(plt.gcf()) # 現在のFigureを取得して表示
 
     # 関数をボタンを押すとstock_predict()が発動
     if st.button('予測する'):
